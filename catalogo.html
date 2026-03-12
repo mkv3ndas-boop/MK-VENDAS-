@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo | MK Vendas</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,900&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #0d0d0d;
+        background-image: radial-gradient(circle at top, #330000 0%, #0d0d0d 60%);
+        color: #ffffff;
+        min-height: 100vh;
+        padding: 40px 20px;
+        background-attachment: fixed;
+    }
+
+    /* Cabeçalho do Catálogo */
+    .header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .header img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 3px solid #ff2a2a;
+        box-shadow: 0 0 15px rgba(255, 42, 42, 0.6);
+        margin-bottom: 15px;
+    }
+
+    .header h1 {
+        font-size: 32px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 0px #8a0000;
+    }
+
+    .header p {
+        color: #cccccc;
+        font-weight: bold;
+        margin-top: 5px;
+    }
+
+    /* Grid que organiza os cards automaticamente */
+    .grid-catalogo {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Visual de cada Conta (Cartão) */
+    .card {
+        background: rgba(20, 20, 20, 0.9);
+        border: 1px solid #330000;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+        border-color: #ff2a2a;
+        box-shadow: 0 10px 25px rgba(255, 42, 42, 0.3);
+    }
+
+    /* Imagem ou GIF (substituindo o vídeo pesado) */
+    .card-midia {
+        width: 100%;
+        height: 160px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-bottom: 15px;
+        border: 1px solid #4a0000;
+    }
+
+    .card-titulo {
+        font-size: 20px;
+        font-weight: 900;
+        margin-bottom: 10px;
+        color: #ffffff;
+    }
+
+    .card-descricao {
+        font-size: 13px;
+        color: #aaaaaa;
+        margin-bottom: 15px;
+        line-height: 1.4;
+        flex-grow: 1; /* Empurra o botão pro fundo */
+    }
+
+    .card-preco {
+        font-size: 24px;
+        font-weight: 900;
+        color: #25D366; /* Verde dinheiro para chamar atenção */
+        margin-bottom: 15px;
+        text-shadow: 0 0 10px rgba(37, 211, 102, 0.3);
+    }
+
+    /* Botão de Compra */
+    .btn-comprar {
+        display: block;
+        background: linear-gradient(90deg, #990000, #ff2a2a);
+        color: white;
+        text-decoration: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.2s;
+        border: 1px solid #ff4d4d;
+    }
+
+    .btn-comprar:hover {
+        background: linear-gradient(90deg, #ff2a2a, #ff4d4d);
+        transform: scale(1.05);
+    }
+
+    /* Botão Voltar */
+    .btn-voltar {
+        display: inline-block;
+        margin-top: 40px;
+        color: #ff2a2a;
+        text-decoration: none;
+        font-weight: bold;
+        border: 1px solid #ff2a2a;
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: 0.2s;
+    }
+    
+    .btn-voltar:hover {
+        background: rgba(255, 42, 42, 0.1);
+    }
+</style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="https://raw.githubusercontent.com/mkv3ndas-boop/MK-VENDAS-/refs/heads/main/IMG-20260311-WA0040.jpg" alt="Logo MK Vendas">
+        <h1>Catálogo de Contas</h1>
+        <p>Escolha sua próxima conta gemada</p>
+    </div>
+
+    <div class="grid-catalogo" id="vitrine"></div>
+
+    <div style="text-align: center;">
+        <a href="index.html" class="btn-voltar">⬅ Voltar ao Início</a>
+    </div>
+
+<script>
+    // ========================================================================
+    // SEU INVENTÁRIO DE VENDAS
+    // Para adicionar uma nova conta, basta copiar o bloco entre as chaves { },
+    // colocar uma vírgula no final e colar o novo bloco abaixo.
+    // ========================================================================
+
+    const catalogoDeContas = [
+        {
+            titulo: "Conta 01",
+            midia_url: "https://i.imgur.com/EXEMPLO1.png",
+
+            preco: "R$ ???",
+
+            descricao: "???",
+
+            link_compra: "https://chat.whatsapp.com/ICN7SpbAFiMAnq2KYRjXur?mode=gi_t"
+        },
+
+        {
+            titulo: "Conta 02",
+            midia_url: "https://i.imgur.com/EXEMPLO1.png",
+
+            preco: "R$ ???",
+
+            descricao: "???",
+
+            link_compra: "https://chat.whatsapp.com/ICN7SpbAFiMAnq2KYRjXur?mode=gi_t"
+        },
+
+        {
+            titulo: "Conta 03",
+            midia_url: "https://i.imgur.com/EXEMPLO1.png",
+
+            preco: "R$ ???",
+
+            descricao: "???",
+
+            link_compra: "https://chat.whatsapp.com/ICN7SpbAFiMAnq2KYRjXur?mode=gi_t"
+        }
+    ];
+
+    // ========================================================================
+    // O SCRIPT ABAIXO PEGA A LISTA ACIMA E GERA O HTML SOZINHO. 
+    // NÃO PRECISA MEXER AQUI!
+    // ========================================================================
+
+    const vitrine = document.getElementById('vitrine');
+
+    catalogoDeContas.forEach(conta => {
+        // Cria a estrutura do cartão
+        const card = document.createElement('div');
+        card.className = 'card';
+        
+        // Injeta os dados da conta no HTML
+        card.innerHTML = `
+            <img src="${conta.midia_url}" alt="Preview da ${conta.titulo}" class="card-midia">
+            <h2 class="card-titulo">${conta.titulo}</h2>
+            <p class="card-descricao">${conta.descricao}</p>
+            <div class="card-preco">${conta.preco}</div>
+            <a href="${conta.link_compra}" class="btn-comprar" target="_blank">🛒 Comprar</a>
+        `;
+        
+        // Adiciona o cartão pronto na tela
+        vitrine.appendChild(card);
+    });
+
+</script>
+
+</body>
+</html>
